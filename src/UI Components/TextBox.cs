@@ -1,7 +1,3 @@
-using System.Diagnostics;
-using System.Reflection.Metadata;
-using ZeroElectric.Vinculum;
-
 namespace DerkUI.TextBoxes;
 
 public enum TextBoxState {
@@ -23,7 +19,7 @@ public class EditableTextBox : ITextBox {
     private Rectangle boundary;
 
     public EditableTextBox(TextBoxState _defaultState, Rectangle _boundary) {
-        Text = String.Empty;
+        Text = string.Empty;
         state = _defaultState;
         boundary = _boundary;
     }

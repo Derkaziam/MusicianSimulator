@@ -8,7 +8,7 @@ using MusicianSimulator.Tools;
 namespace MusicianSimulator.Core;
 
 class Program {
-	static Vector2 boxSize = new(5, 5);
+	static Vector2 boxSize = new(20);
 
     static void Main() {
 		Vector2 mousePos;
@@ -29,8 +29,8 @@ class Program {
 
 		while (!Raylib.WindowShouldClose()) {
 			mousePos = Raylib.GetMousePosition();
-			mousePos.X = (float) Math.Round(mousePos.X / GD.PercentToScreen((int)boxSize.X)) * GD.PercentToScreen((int)boxSize.X);
-			mousePos.Y = (float) Math.Round(mousePos.Y / GD.PercentToScreen((int)boxSize.Y)) * GD.PercentToScreen((int)boxSize.Y);
+			mousePos.X = (float) Math.Round(mousePos.X / boxSize.X) * boxSize.X;
+			mousePos.Y = (float) Math.Round(mousePos.Y / boxSize.Y) * boxSize.Y;
 			
 			textBox.Update();
 			textBox.Debug(60);
@@ -56,11 +56,11 @@ class Program {
 
 	static void RenderLines() {
 		for (int y = 0; y < GD.screenHeight; y += (int) boxSize.Y) {
-			Raylib.DrawLine(0, GD.PercentToScreen(y), GD.screenWidth, GD.PercentToScreen(y), Raylib.DARKGRAY);
+			Raylib.DrawLine(0, y, GD.screenWidth, y, Raylib.DARKGRAY);
 		}
 		
 		for (int x = 0; x < GD.screenWidth; x += (int) boxSize.X) {
-			Raylib.DrawLine(GD.PercentToScreen(x), 0, GD.PercentToScreen(x), GD.screenWidth, Raylib.DARKGRAY);
+			Raylib.DrawLine(x, 0, x, GD.screenWidth, Raylib.DARKGRAY);
 		}
 	} 
 }
