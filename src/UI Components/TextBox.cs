@@ -8,7 +8,6 @@ public enum TextBoxState {
 
 public interface ITextBox {
     public string Text { get; set; }
-
     public void Draw();
     public void Update();
 }

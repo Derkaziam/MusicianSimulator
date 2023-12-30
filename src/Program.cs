@@ -13,7 +13,7 @@ class Program {
     static void Main() {
 		Vector2 mousePos;
 
-		Raylib.InitWindow(GD.screenWidth, GD.screenHeight, "Hello World , Raylib-CSharp-Vinculum");
+		Raylib.InitWindow(GD.screenWidth, GD.screenHeight, "Musician Simulator");
 		Raylib.SetTargetFPS(60);
 
 		BasicTextButton button = new (
