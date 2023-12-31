@@ -60,7 +60,12 @@ Purple ~ Charts
 ![Region Map](RegionMap.png)
 
 Green ~ Statistics
-- top 15 songs by units sold (streaming and pure)
-- albums ranked by units sold
-- albums/EPs ranked by critical acclaim
+- Player Stats:
+    - Top 15 songs by units sold (streaming and pure)
+    - Albums ranked by units sold
+    - Albums/EPs ranked by critical acclaim
+- Overall Stats:
+    - Top 50 songs by units sold (streaming and pure)
+    - Top 50 albums ranked by units sold
+    - Top 50 albums/EPs ranked by critical acclaim
 
