@@ -20,8 +20,8 @@ class Program {
 			new Vector4(0, 0, 64, 32),
 			new Vector4(20, 160, 128, 64),
 			new Vector2(400, 175),
-			"Hello World, I haven't been clicked!",
-			"Hello World, I have been clicked!",
+			"eversnore tanked",
+			"speak now outsold",
 			@"\programs\personal\c#\Games\MusicianSimulator\res\art\Button.png"
 		);
 
