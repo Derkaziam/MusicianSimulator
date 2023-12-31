@@ -48,14 +48,14 @@ Orange ~ Shop
     - Digital Album/EP
 
 Purple ~ Charts
-- 48 total charts across the 8 regions
+- 60 total charts across the 8 regions
 - Top 50 Songs by radio play per region
 - Top 50 Songs by streams per region 
 - Top 100 Songs per region
 - Top 100 Artists by units per region
 - Top 100 Artists by streams per region
 - Top 200 Albums/EPs per region
-- 8 Regions (shown below):
+- 10 Regions (shown below):
 
 ![Region Map](RegionMap.png)
 

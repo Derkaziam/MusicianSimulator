@@ -1,4 +1,4 @@
-namespace DerkUI.TextBoxes;
+namespace MusicianSimulator.UI.TextBoxes;
 
 public enum TextBoxState {
     NORMAL,

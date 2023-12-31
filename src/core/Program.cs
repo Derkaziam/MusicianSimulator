@@ -1,9 +1,10 @@
 ﻿global using ZeroElectric.Vinculum;
 global using System.Numerics;
 
-using DerkUI.Buttons;
-using DerkUI.TextBoxes;
-using MusicianSimulator.Tools;
+using MusicianSimulator.UI.Buttons;
+using MusicianSimulator.UI.TextBoxes;
+using MusicianSimulator.Core.Tools;
+using MusicianSimulator.Core.Menus;
 
 namespace MusicianSimulator.Core;
 
@@ -17,13 +18,21 @@ class Program {
 		Raylib.SetTargetFPS(60);
 
 		BasicTextButton button = new (
-			new Vector4(0, 0, 64, 32),
-			new Vector4(20, 160, 128, 64),
+			new Rectangle(0, 0, 64, 32),
+			new Rectangle(20, 160, 128, 64),
 			new Vector2(400, 175),
 			"eversnore tanked",
 			"speak now outsold",
 			@"\programs\personal\c#\Games\MusicianSimulator\res\art\Button.png"
 		);
+
+		/* StateButton stateButton = new(
+			@"\programs\personal\c#\Games\MusicianSimulator\res\art\Button.png",
+			new Rectangle(96, 0, 64, 32),
+			new Rectangle(20, 260, 128, 64)
+		); */
+
+		MainMenu menu = new();
 
 		EditableTextBox textBox = new(TextBoxState.NORMAL, new Rectangle(100, 100, 200, 40));
 
@@ -35,6 +44,8 @@ class Program {
 			textBox.Update();
 			textBox.Debug(60);
 			button.Update();
+			menu.Update();
+			//stateButton.Update();
 
 			Raylib.BeginDrawing();
 
@@ -43,10 +54,14 @@ class Program {
 			RenderLines();
 
 			Raylib.DrawText(mousePos.ToString(), 20, 20, 20, Raylib.BLACK);
+			
+			//if (stateButton.BeenClicked) Raylib.DrawText("Hi from state button!", 20, 300, 20, Raylib.BLACK);
 			Raylib.DrawFPS(20, 40);
 
 			textBox.Draw();
 			button.Draw();
+			menu.Draw();
+			// stateButton.Draw();
 
 			Raylib.EndDrawing();
 		}
@@ -56,11 +71,11 @@ class Program {
 
 	static void RenderLines() {
 		for (int y = 0; y < GD.screenHeight; y += (int) boxSize.Y) {
-			Raylib.DrawLine(0, y, GD.screenWidth, y, Raylib.DARKGRAY);
+			Raylib.DrawLine(0, y, GD.screenWidth, y, Raylib.LIGHTGRAY);
 		}
 		
 		for (int x = 0; x < GD.screenWidth; x += (int) boxSize.X) {
-			Raylib.DrawLine(x, 0, x, GD.screenWidth, Raylib.DARKGRAY);
+			Raylib.DrawLine(x, 0, x, GD.screenWidth, Raylib.LIGHTGRAY);
 		}
 	} 
 }

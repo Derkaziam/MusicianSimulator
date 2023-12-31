@@ -1,4 +1,4 @@
-namespace MusicianSimulator.Tools;
+namespace MusicianSimulator.Core.Tools;
 
 public static class GD {
     public static readonly int screenWidth = 1280;
