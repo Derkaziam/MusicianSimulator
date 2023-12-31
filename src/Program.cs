@@ -17,8 +17,8 @@ class Program {
 		Raylib.SetTargetFPS(60);
 
 		BasicTextButton button = new (
-			new Vector4(0, 0, 32, 16),
-			new Vector4(350, 200, 100, 40),
+			new Vector4(0, 0, 64, 32),
+			new Vector4(20, 160, 128, 64),
 			new Vector2(400, 175),
 			"Hello World, I haven't been clicked!",
 			"Hello World, I have been clicked!",

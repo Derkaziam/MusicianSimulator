@@ -98,7 +98,7 @@ public unsafe class BasicTextButton : IButton, ITextButton {
     private void OnClick() {
         Text = alternateText;
         isPressed = false;
-        source.Y = 16;
+        source.Y = source.height;
     }
 
     private void Reset() {
