@@ -3,6 +3,7 @@ using MusicianSimulator.UI.Buttons;
 namespace MusicianSimulator.UI.Handlers;
 
 public class ButtonHandler {
+    public IStateButton? CurrentButton { get; set; }
     List<IStateButton> buttons;
 
     public ButtonHandler(List<IStateButton> _buttons) {
@@ -12,6 +13,7 @@ public class ButtonHandler {
     public void Update() {
         foreach (IStateButton button in buttons) {
             if (button.Ping) {
+                CurrentButton = button;
                 // Change the state of all other buttons to off
                 foreach (IStateButton otherButton in buttons) {
                     if (otherButton != button) {
@@ -22,6 +24,4 @@ public class ButtonHandler {
             }
         }
     }
-
-
 }

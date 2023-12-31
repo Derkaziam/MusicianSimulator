@@ -26,7 +26,7 @@ public interface IStateButton : IButton {
 /// <summary>
 /// Represents a button that displays text. Implements IButton & ITextButton.
 /// </summary>
-public unsafe class BasicTextButton : ITextButton {
+public unsafe class TextButton : ITextButton {
     /// <summary>
     /// What the button displays.
     /// </summary>
@@ -42,7 +42,7 @@ public unsafe class BasicTextButton : ITextButton {
     private readonly string originalText;
     private readonly string alternateText;
     
-    public BasicTextButton(Rectangle _source, // Determines the position and size of the button
+    public TextButton(Rectangle _source, // Determines the position and size of the button
                                   Rectangle _dest, // Determines which sprite to use
                                   Vector2 _textPos, // Where the text will be drawn
                                   string _text, // What the button displays by default
@@ -127,11 +127,13 @@ public unsafe class StateButton : IStateButton {
     private readonly Texture texture;
     private readonly Vector2 origin;
     private Rectangle source;
+    private Rectangle originalSource;
     private Rectangle destination;
 
     public StateButton(string _texPath, Rectangle _src, Rectangle _dest) {
         texture = Raylib.LoadTexture(_texPath);
         source = _src;
+        originalSource = _src;
         destination = _dest;
 
         origin = Vector2.Zero;
@@ -165,11 +167,11 @@ public unsafe class StateButton : IStateButton {
         if (isPressed == true) {
             BeenClicked = true;
             Ping = true;
-            source.Y = source.height;
+            source.Y = originalSource.Y + originalSource.height;
         }
     }
 
     private void Reset() {
-        source.Y = 0;
+        source.Y = originalSource.Y;
     }
 }

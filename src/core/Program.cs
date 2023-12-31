@@ -17,7 +17,7 @@ class Program {
 		Raylib.InitWindow(GD.screenWidth, GD.screenHeight, "Musician Simulator");
 		Raylib.SetTargetFPS(60);
 
-		BasicTextButton button = new (
+		TextButton button = new (
 			new Rectangle(0, 0, 64, 32),
 			new Rectangle(20, 160, 128, 64),
 			new Vector2(400, 175),
