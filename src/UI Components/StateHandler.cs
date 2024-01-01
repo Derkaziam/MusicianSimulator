@@ -1,6 +1,6 @@
-using MusicianSimulator.UI.Buttons;
+using PollinateUI.Buttons;
 
-namespace MusicianSimulator.UI.Handlers;
+namespace PollinateUI.Handlers;
 
 public class ButtonHandler {
     public IStateButton? CurrentButton { get; set; }

@@ -1,4 +1,4 @@
-namespace MusicianSimulator.UI.Buttons;
+namespace PollinateUI.Buttons;
 
 /// <summary>
 /// The root interface of all buttons.
@@ -26,7 +26,7 @@ public interface IStateButton : IButton {
 /// <summary>
 /// Represents a button that displays text. Implements IButton & ITextButton.
 /// </summary>
-public unsafe class TextButton : ITextButton {
+public unsafe class TextButtonTex : ITextButton {
     /// <summary>
     /// What the button displays.
     /// </summary>
@@ -42,14 +42,21 @@ public unsafe class TextButton : ITextButton {
     private readonly string originalText;
     private readonly string alternateText;
     
-    public TextButton(Rectangle _source, // Determines the position and size of the button
+    /// <summary>
+    /// Initializes a new instance of the TextButton class.
+    /// </summary>
+    /// <param name="_source">Determines the position and size of the button.</param>
+    /// <param name="_dest">Determines which sprite to use.</param>
+    /// <param name="_textPos">Where the text will be drawn.</param>
+    /// <param name="_text">What the button displays by default.</param>
+    /// <param name="_altText">The alternative text to be used if the button is pressed.</param>
+    public TextButtonTex(Rectangle _source, // Determines the position and size of the button
                                   Rectangle _dest, // Determines which sprite to use
                                   Vector2 _textPos, // Where the text will be drawn
                                   string _text, // What the button displays by default
-                                  string _altText, // The alternative text to be used if the button is pressed
-                                  string _texturePath // The path to the button's texture
+                                  string _altText // The alternative text to be used if the button is pressed
     ) {
-        texture = Raylib.LoadTexture(_texturePath); // Loads the texture
+        texture = Raylib.LoadTexture(@"\programs\personal\c#\Games\MusicianSimulator\res\art\Button.png"); // Loads the texture
         source = _source; // What sprite is used
         destination = _dest; // Where the sprite is drawn
         origin = Vector2.Zero; // Center of sprite
@@ -121,7 +128,7 @@ public unsafe class TextButton : ITextButton {
     }
 }
 
-public unsafe class StateButton : IStateButton {
+public unsafe class StateButtonTex : IStateButton {
     public bool BeenClicked { get; set; }
     public bool Ping { get; private set; }
     private readonly Texture texture;
@@ -130,7 +137,7 @@ public unsafe class StateButton : IStateButton {
     private Rectangle originalSource;
     private Rectangle destination;
 
-    public StateButton(string _texPath, Rectangle _src, Rectangle _dest) {
+    public StateButtonTex(string _texPath, Rectangle _src, Rectangle _dest) {
         texture = Raylib.LoadTexture(_texPath);
         source = _src;
         originalSource = _src;

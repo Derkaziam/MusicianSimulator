@@ -1,4 +1,4 @@
-namespace MusicianSimulator.UI.TextBoxes;
+namespace PollinateUI.TextBoxes;
 
 public enum TextBoxState {
     NORMAL,
