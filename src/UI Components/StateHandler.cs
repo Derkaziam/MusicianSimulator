@@ -1,12 +1,14 @@
+using System.Collections;
+using MusicianSimulator.Core.Menus;
 using PollinateUI.Buttons;
 
 namespace PollinateUI.Handlers;
 
 public class ButtonHandler {
-    public IStateButton? CurrentButton { get; set; }
+    public IStateButton? CurrentButton { get; private set; }
     List<IStateButton> buttons;
 
-    public ButtonHandler(List<IStateButton> _buttons) {
+    public ButtonHandler(ref List<IStateButton> _buttons) {
         buttons = _buttons;
     }
 

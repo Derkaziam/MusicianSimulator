@@ -1,5 +1,3 @@
-using PollinateUI.Buttons;
-using PollinateUI.TextBoxes;
 using MusicianSimulator.Core.Menus;
 
 namespace MusicianSimulator.Core;
@@ -22,6 +20,8 @@ public unsafe class Game {
     }
 
     public unsafe void Draw() {
+        Raylib.ClearBackground(GD.BACKGROUND_COLOR);
+
         RenderLines();
 
         Raylib.DrawText(mousePos.ToString(), 20, 20, 20, Raylib.BLACK);
@@ -36,11 +36,11 @@ public unsafe class Game {
 
     void RenderLines() {
 		for (int y = 0; y < GD.screenHeight; y += (int) boxSize.Y) {
-			Raylib.DrawLine(0, y, GD.screenWidth, y, Raylib.LIGHTGRAY);
+			Raylib.DrawLine(0, y, GD.screenWidth, y, GD.LINES_COLOR);
 		}
 		
 		for (int x = 0; x < GD.screenWidth; x += (int) boxSize.X) {
-			Raylib.DrawLine(x, 0, x, GD.screenWidth, Raylib.LIGHTGRAY);
+			Raylib.DrawLine(x, 0, x, GD.screenWidth, GD.LINES_COLOR);
 		}
 	}
 }

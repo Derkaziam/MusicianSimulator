@@ -7,7 +7,7 @@ namespace MusicianSimulator.Core;
 class Program {
     static void Main() {
 		Raylib.InitWindow(GD.screenWidth, GD.screenHeight, "Musician Simulator");
-		Raylib.SetTargetFPS(60);
+		Raylib.SetTargetFPS(GD.targetFPS);
 
 		Game game = new();
 
@@ -17,8 +17,6 @@ class Program {
 			game.Update();
 
 			Raylib.BeginDrawing();
-
-			Raylib.ClearBackground(Raylib.RAYWHITE);
 
 			game.Draw();
 

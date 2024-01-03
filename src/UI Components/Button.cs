@@ -51,12 +51,13 @@ public unsafe class TextButtonTex : ITextButton {
     /// <param name="_text">What the button displays by default.</param>
     /// <param name="_altText">The alternative text to be used if the button is pressed.</param>
     public TextButtonTex(Rectangle _source, // Determines the position and size of the button
-                                  Rectangle _dest, // Determines which sprite to use
-                                  Vector2 _textPos, // Where the text will be drawn
-                                  string _text, // What the button displays by default
-                                  string _altText // The alternative text to be used if the button is pressed
+                        Rectangle _dest, // Determines which sprite to use
+                        Vector2 _textPos, // Where the text will be drawn
+                        string _text, // What the button displays by default
+                        string _altText, // The alternative text to be used if the button is pressed
+                        string _texPath
     ) {
-        texture = Raylib.LoadTexture(@"\programs\personal\c#\Games\MusicianSimulator\res\art\Button.png"); // Loads the texture
+        texture = Raylib.LoadTexture(_texPath); // Loads the texture
         source = _source; // What sprite is used
         destination = _dest; // Where the sprite is drawn
         origin = Vector2.Zero; // Center of sprite
@@ -133,15 +134,19 @@ public unsafe class StateButtonTex : IStateButton {
     public bool Ping { get; private set; }
     private readonly Texture texture;
     private readonly Vector2 origin;
+    private readonly bool holdState;
     private Rectangle source;
     private Rectangle originalSource;
     private Rectangle destination;
+    private bool shouldTick;
+    private int frameCount;
 
-    public StateButtonTex(string _texPath, Rectangle _src, Rectangle _dest) {
+    public StateButtonTex(string _texPath, Rectangle _src, Rectangle _dest, bool _holdState) {
         texture = Raylib.LoadTexture(_texPath);
         source = _src;
         originalSource = _src;
         destination = _dest;
+        holdState = _holdState;
 
         origin = Vector2.Zero;
         Ping = false;
@@ -163,6 +168,16 @@ public unsafe class StateButtonTex : IStateButton {
             CheckState(mousePos);
         }
 
+        if (!holdState) {
+            if (shouldTick) {
+            frameCount++;
+                if (frameCount % 120 == 0) {
+                    Reset();
+                    shouldTick = false;
+                }
+            } else frameCount = 0;
+        }
+
         // Animates the button
         if (!BeenClicked) Reset();
     }
@@ -174,6 +189,7 @@ public unsafe class StateButtonTex : IStateButton {
         if (isPressed == true) {
             BeenClicked = true;
             Ping = true;
+            shouldTick = true;
             source.Y = originalSource.Y + originalSource.height;
         }
     }
