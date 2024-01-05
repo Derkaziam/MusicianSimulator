@@ -1,36 +1,19 @@
+using PollinateUI.Buttons;
+
 namespace MusicianSimulator.Core.Menus;
 
 public interface IMenu {
+    public bool Ping { get; }
     public void Update();
     public void Draw();
 }
 
-public enum MenuType {
-    MAIN,
-    GAME
-}
-
-public class RootMenuHandler {
-    readonly MenuType? currentMenu;
-    readonly MenuType? selectedMenu;
-    MainMenu mainMenu;
-    GameMenu gameMenu;
-    
-    public RootMenuHandler() {
-        mainMenu = new();
-        gameMenu = new();
-    }
-
-    public void Draw() {
-        switch (currentMenu) {
-            case MenuType.MAIN:
-                mainMenu.Draw();
-                break;
-            case MenuType.GAME:
-                gameMenu.Draw();
-                break;
-        }
-    }
+public enum MainMenus {
+    NONE,
+    GAME,
+    LOAD,
+    SETTINGS,
+    CLOSE,
 }
 
 public enum GameMenus {
@@ -39,5 +22,5 @@ public enum GameMenus {
     ACCT,
     STATS,
     CHART,
-    SHOP
+    SHOP,
 }

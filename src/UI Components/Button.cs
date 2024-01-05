@@ -132,6 +132,7 @@ public unsafe class TextButtonTex : ITextButton {
 public unsafe class StateButtonTex : IStateButton {
     public bool BeenClicked { get; set; }
     public bool Ping { get; private set; }
+    public bool Disabled { get; set; }
     private readonly Texture texture;
     private readonly Vector2 origin;
     private readonly bool holdState;
@@ -141,45 +142,51 @@ public unsafe class StateButtonTex : IStateButton {
     private bool shouldTick;
     private int frameCount;
 
-    public StateButtonTex(string _texPath, Rectangle _src, Rectangle _dest, bool _holdState) {
+    public StateButtonTex(string _texPath, Rectangle _src, Rectangle _dest, bool _holdState = true, bool _disabled = false) {
         texture = Raylib.LoadTexture(_texPath);
         source = _src;
         originalSource = _src;
         destination = _dest;
         holdState = _holdState;
 
+        Disabled = _disabled;
+
         origin = Vector2.Zero;
         Ping = false;
     }
     
     public unsafe void Draw() {
-        Raylib.DrawTexturePro(
-            texture,
-            source, destination,
-            origin, 0, Raylib.WHITE
-        );
+        if (Disabled == false) {
+            Raylib.DrawTexturePro(
+                texture,
+                source, destination,
+                origin, 0, Raylib.WHITE
+            );
+        }
     }
     
     public void Update() {
-        Ping = false;
-        // Checks if mouse is pressed, checks if button is pressed and sets shouldTick to true
-        if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
-            Vector2 mousePos = Raylib.GetMousePosition();
-            CheckState(mousePos);
-        }
+        if (Disabled == false) {        
+            Ping = false;
+            // Checks if mouse is pressed, checks if button is pressed and sets shouldTick to true
+            if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_BUTTON_LEFT)){
+                Vector2 mousePos = Raylib.GetMousePosition();
+                CheckState(mousePos);
+            }
 
-        if (!holdState) {
-            if (shouldTick) {
-            frameCount++;
-                if (frameCount % 120 == 0) {
-                    Reset();
-                    shouldTick = false;
-                }
-            } else frameCount = 0;
-        }
+            if (!holdState) {
+                if (shouldTick) {
+                frameCount++;
+                    if (frameCount % 120 == 0) {
+                        Reset();
+                        shouldTick = false;
+                    }
+                } else frameCount = 0;
+            }
 
-        // Animates the button
-        if (!BeenClicked) Reset();
+            // Animates the button
+            if (!BeenClicked) Reset();
+        }
     }
 
     private void CheckState(Vector2 _mousePos) {

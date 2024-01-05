@@ -1,3 +1,4 @@
+using System.Net.NetworkInformation;
 using PollinateUI.Buttons;
 using PollinateUI.Handlers;
 using PollinateUI.Images;
@@ -5,10 +6,12 @@ using PollinateUI.Images;
 namespace MusicianSimulator.Core.Menus;
 
 public class MainMenu : IMenu {
+    public bool Ping { get; private set; }
     readonly List<IStateButton> buttons;
     readonly PollinateImage logo;
     readonly ButtonHandler buttonHandler;
-    GameMenu gameMenu;
+    private GameMenu gameMenu;
+    private MainMenus currentMenu;
 
     public MainMenu() {
         buttons = new List<IStateButton>() {
@@ -16,29 +19,25 @@ public class MainMenu : IMenu {
             new StateButtonTex (
                 @"\programs\personal\c#\Games\MusicianSimulator\res\art\MainMenuButtons.png",
                 new Rectangle(0, 0, 96, 32),
-                new Rectangle(434, 368, 192, 64),
-                true
+                new Rectangle(434, 368, 192, 64)
             ),
             // Close button
             new StateButtonTex (
                 @"\programs\personal\c#\Games\MusicianSimulator\res\art\MainMenuButtons.png",
                 new Rectangle(96, 0, 96, 32),
-                new Rectangle(658, 448, 192, 64),
-                true
+                new Rectangle(658, 448, 192, 64)
             ),
             // Settings button
             new StateButtonTex (
                 @"\programs\personal\c#\Games\MusicianSimulator\res\art\MainMenuButtons.png",
                 new Rectangle(0, 64, 96, 32),
-                new Rectangle(658, 368, 192, 64),
-                true
+                new Rectangle(658, 368, 192, 64)
             ),
             // Load button
             new StateButtonTex (
                 @"\programs\personal\c#\Games\MusicianSimulator\res\art\MainMenuButtons.png",
                 new Rectangle(96, 64, 96, 32),
-                new Rectangle(434, 448, 192, 64),
-                true
+                new Rectangle(434, 448, 192, 64)
             )
         };
         buttonHandler = new ButtonHandler(ref buttons);
@@ -56,22 +55,26 @@ public class MainMenu : IMenu {
         }
         buttonHandler.Update();
 
-        if (buttonHandler.CurrentButton != null) {
-            if (buttonHandler.CurrentButton == buttons[0]) { // Start button
-                gameMenu.Update();
-            }
-        }
+        MenuHandler();
     }
 
     public void Draw() {
+        if (currentMenu == MainMenus.GAME) {
+            gameMenu.Draw();
+            return;
+        }
+
         foreach (IStateButton button in buttons) {
             button.Draw();
         }
         logo.Draw();
+    }
 
+    private void MenuHandler() {
         if (buttonHandler.CurrentButton != null) {
             if (buttonHandler.CurrentButton == buttons[0]) { // Start button
-                gameMenu.Draw();
+                currentMenu = MainMenus.GAME;
+                gameMenu.Update();
             }
         }
     }
